@@ -1,0 +1,18 @@
+# Grub Tune Tester
+
+**GTT** is an online tool to test your `GRUB_INIT_TUNE` beforehand.
+
+## How to use
+
+Just enter a `GRUB_INIT_TUNE` using the following format:
+
+`tempo freq duration [freq duration freq duration...]`
+
+Where `tempo` is the beats per minute of your tune, `freq` is the frequency
+(in hertz) of the sound, and `duration` is the duration of the sound in a 4/4
+bar (meaning 1 is a quarter of a bar and 4 a full bar).
+
+## How to help
+
+This project is in a very early stage, so there's a lot of room for improvements.
+Let me know how GTT can be better.
