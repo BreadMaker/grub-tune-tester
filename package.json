@@ -1,6 +1,6 @@
 {
   "name": "grub-tune-tester",
-  "version": "0.0.1-beta",
+  "version": "0.1.0-beta",
   "description": "A GRUB_INIT_TUNE online tester.",
   "main": "index.html",
   "repository": {
@@ -12,7 +12,7 @@
     "build:css": "cat src/css/main.css | cleancss -O1 specialComments:0 -O2 restructureRules:on > css/main.min.css",
     "watch:css": "watch 'npm run build:css' src/css/",
     "prebuild:js": "npm run lint",
-    "build:js": "uglifyjs src/js/main.js --compress --mangle toplevel --mangle reserved=[\"beep\",\"audioCtx\"] -o js/main.min.js --comment --screw-ie8 --source-map \"filename='js/main.min.js.map', root='/', url='main.min.js.map'\"",
+    "build:js": "uglifyjs src/js/main.js --compress --mangle toplevel -o js/main.min.js --comment --screw-ie8 --source-map \"filename='js/main.min.js.map', root='/', url='main.min.js.map'\"",
     "watch:js": "watch 'npm run build:js' src/js/",
     "build:html": "html-minifier --remove-comments --collapse-whitespace --minify-css --minify-js < src/html/index.html > index.html",
     "watch:html": "watch 'npm run build:html' src/html/",
