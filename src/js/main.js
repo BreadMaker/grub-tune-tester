@@ -39,6 +39,12 @@ function play(tempo, tune) {
 }
 
 $(document).ready(function () {
+    $("#tune").dropdown({
+        onChange: function (text, value) {
+            console.log(value);
+        },
+        allowAdditions: true
+    });
     $("#tune-form").submit(function (e) {
         e.preventDefault();
         var inputArr = $("#tune").val().split(" ");
