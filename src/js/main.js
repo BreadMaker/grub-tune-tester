@@ -5,8 +5,8 @@ function composeTune(tuneArr) {
     var tune = [];
     while (tuneArr.length > 0) {
         tune.push({
-            frequency: tuneArr[0],
-            duration: tuneArr[1]
+            frequency: parseInt(tuneArr[0]),
+            duration: parseInt(tuneArr[1])
         });
         tuneArr = tuneArr.splice(2);
     }
@@ -14,6 +14,10 @@ function composeTune(tuneArr) {
 }
 
 function play(tempo, tune) {
+    if (isNaN(tempo)) {
+        $("#tune, #play").removeClass("disabled").removeAttr("disabled");
+        return;
+    }
     var oscillator, baseTime = audioCtx.currentTime,
         arrayLength = tune.length,
         playlength = 0,
@@ -50,6 +54,6 @@ $(document).ready(function () {
         var inputArr = $("#tune").val().split(" ");
         $("#tune, #play").addClass("disabled").attr("disabled",
             "disabled");
-        play(inputArr[0], composeTune(inputArr.splice(1)));
+        play(parseInt(inputArr[0]), composeTune(inputArr.splice(1)));
     });
 });
