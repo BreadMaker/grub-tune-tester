@@ -1,35 +1,48 @@
 /*jshint -W056 */
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 
-function composeTune(tuneArr) {
-    var tune = [];
+function createTuneObj(tuneStr) {
+    var tuneArr = tuneStr.split(" ");
+    var tuneObj = {};
+    tuneObj.tempo = parseInt(tuneArr[0]);
+    tuneObj.tune = [];
+    tuneArr = tuneArr.splice(1);
     while (tuneArr.length > 0) {
-        tune.push({
+        tuneObj.tune.push({
             frequency: parseInt(tuneArr[0]),
             duration: parseInt(tuneArr[1])
         });
         tuneArr = tuneArr.splice(2);
     }
-    return tune;
+    return tuneObj;
 }
 
-function play(tempo, tune) {
-    if (isNaN(tempo)) {
+function calculateDuration(tuneObj) {
+    var playlength = 0;
+    for (var i = 0; i < tuneObj.tune.length; i++) {
+        playlength += 1 / (tuneObj.tempo / 60) * tuneObj.tune[i].duration;
+    }
+    $("#notes").text(tuneObj.tune.length);
+    $("#duration").text(Math.round(playlength * 1000));
+}
+
+function play(tuneObj) {
+    if (isNaN(tuneObj.tempo)) {
         $("#tune, #play").removeClass("disabled").removeAttr("disabled");
         return;
     }
-    var oscillator, baseTime = audioCtx.currentTime,
-        arrayLength = tune.length,
+    var baseTime = audioCtx.currentTime,
+        arrayLength = tuneObj.tune.length,
         playlength = 0,
         gainNode = audioCtx.createGain();
     for (var i = 0; i < arrayLength; i++) {
-        oscillator = audioCtx.createOscillator();
+        var oscillator = audioCtx.createOscillator();
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        gainNode.gain.value = 0.125;
-        playlength = 1 / (tempo / 60) * tune[i].duration;
+        gainNode.gain.value = 0.0625;
+        playlength = 1 / (tuneObj.tempo / 60) * tuneObj.tune[i].duration;
         oscillator.type = "square";
-        oscillator.frequency.value = tune[i].frequency;
+        oscillator.frequency.value = tuneObj.tune[i].frequency;
         if (i == arrayLength - 1) {
             /*jshint -W083 */
             oscillator.onended = function (ev) {
@@ -45,15 +58,16 @@ function play(tempo, tune) {
 $(document).ready(function () {
     $("#tune").dropdown({
         onChange: function (text, value) {
-            console.log(value);
+            calculateDuration(createTuneObj(value));
         },
-        allowAdditions: true
-    });
+        allowAdditions: true,
+        hideAdditions: false
+    }).trigger("change");
     $("#tune-form").submit(function (e) {
         e.preventDefault();
-        var inputArr = $("#tune").val().split(" ");
         $("#tune, #play").addClass("disabled").attr("disabled",
             "disabled");
-        play(parseInt(inputArr[0]), composeTune(inputArr.splice(1)));
+        play(createTuneObj($("#tune").val()));
     });
+    calculateDuration(createTuneObj($("#tune").val()));
 });
