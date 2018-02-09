@@ -1,5 +1,6 @@
 /*jshint -W056 */
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+var requestId;
 
 function createTuneObj(tuneStr) {
     var tuneArr = tuneStr.split(" ");
@@ -39,7 +40,7 @@ function play(tuneObj) {
         var oscillator = audioCtx.createOscillator();
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        gainNode.gain.value = 0.0625;
+        gainNode.gain.value = 0.125;
         playlength = 1 / (tuneObj.tempo / 60) * tuneObj.tune[i].duration;
         oscillator.type = "square";
         oscillator.frequency.value = tuneObj.tune[i].frequency;
@@ -47,6 +48,7 @@ function play(tuneObj) {
             /*jshint -W083 */
             oscillator.onended = function (ev) {
                 $("#tune, #play").removeClass("disabled").removeAttr("disabled");
+                cancelAnimationFrame(requestId);
             };
         }
         oscillator.start(baseTime);
@@ -67,7 +69,8 @@ $(document).ready(function () {
         e.preventDefault();
         $("#tune, #play").addClass("disabled").attr("disabled",
             "disabled");
-        play(createTuneObj($("#tune").val()));
+        requestId = requestAnimationFrame(play(createTuneObj($("#tune")
+            .val())));
     });
     calculateDuration(createTuneObj($("#tune").val()));
 });
