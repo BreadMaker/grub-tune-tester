@@ -58,6 +58,15 @@ function play(tuneObj) {
 }
 
 $(document).ready(function () {
+    var clipboard = new ClipboardJS("#copy", {
+        text: function (trigger) {
+            return $("#tune").val();
+        }
+    });
+    clipboard.on('success', function () {
+        $("#copy").popup("change content", "Copied!");
+    });
+    $("#copy").popup();
     $("#tune").dropdown({
         onChange: function (text, value) {
             calculateDuration(createTuneObj(value));
