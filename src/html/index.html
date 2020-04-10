@@ -3,11 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A GRUB_INIT_TUNE online tester. Choose from a selection or create your own! - by BreadMaker">
-        <meta name="creator" content="BreadMaker aka CTM">
+        <meta name="description" content="A GRUB_INIT_TUNE online tester. Choose from a selection or create your own!">
+        <meta name="creator" content="Aaron John Sabu from BreadMaker aka CTM">
         <meta name="keywords" content="grub, grub2, tune, GRUB_INIT_TUNE, online, test">
         <link rel="icon" type="image/png" href="./img/favicon.png">
-        <title>Grub tune tester v0.4.0</title>
+        <title>Grub Tune Tester v0.4.0</title>
         <link rel="stylesheet"
             href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI/2.2.14/dist/semantic.min.css"
             integrity="sha384-5Eg8kWCPGMl1/3GjE+d9MrU7sOdeJooTJzYKV+mE2erbNc+VVu0wA/TVGNvAc+GL"
@@ -15,12 +15,6 @@
         <link rel="stylesheet" href="/css/main.min.css">
     </head>
     <body>
-        <a href="https://github.com/BreadMaker/grub-tune-tester">
-            <img style="position: absolute; top: 0; right: 0; border: 0;"
-                src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"
-                alt="Fork me on GitHub"
-                data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png">
-        </a>
         <div class="ui container">
             <h1 class="ui center aligned header" style="padding-top:1.5em;">
                 <code>GRUB_INIT_TUNE</code> tester <sup>v0.4.0</sup>
@@ -28,7 +22,7 @@
             <form id="tune-form" class="ui form">
                 <div class="field">
                     <label for="tune">
-                        Enter a <code>GRUB_INIT_TUNE</code> line
+                        <code>GRUB_INIT_TUNE</code> line:
                     </label>
                     <div class="ui action input">
                         <select id="tune" name="tune" class="ui fluid search dropdown">
@@ -58,34 +52,18 @@
             </form>
             <h2 class="ui dividing header">FAQ</h2>
             <h3>How a tune works?</h3>
-            <p>A <code>GRUB_INIT_TUNE</code> uses the following
-                format:</p>
             <div class="ui grey segment"><code>
-                tempo freq duration [freq duration freq duration...]
+                tempo freq duration freq duration freq duration...
             </code></div>
-            <p>Where:</p>
             <ul>
-                <li><code>tempo</code> is the base for all note durations in
-                    beats per minute (60 gives a 1-second base, 120 gives a
-                    half-second base, etc.)</li>
-                <li><code>freq</code> is the frequency (in hertz) of the sound
+                <li><code>tempo</code> = base for all note durations in
+                    beats per minute (60: 1-second base, 120:
+                    half-second base...)</li>
+                <li><code>freq</code> = frequency (in hertz) of the sound
                     (set 0 to produce a rest)</li>
-                <li><code>duration</code> is the duration of the sound in a 4/4
-                    bar (meaning 1 is a quarter of a bar and 4 a full bar)</li>
+                <li><code>duration</code> = duration of the sound in a 4/4
+                    bar (1: quarter of a bar, 4: a full bar)</li>
             </ul>
-            <div class="ui divider"></div>
-            <h3>Why my screen is black while tune is playing?</h3>
-            <p>
-                That's how GRUB is designed, so bear in mind while tune is
-                playing, booting will be paused. Try not to use long tunes.
-            </p>
-            <div class="ui divider"></div>
-            <h3>Why is so loud!?</h3>
-            <p>
-                Tunes will be played on the PC speaker at full volume. There's
-                no way to control volume. If your speaker is too loud, a short
-                tune is recommended.
-            </p>
         </div>
         <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
