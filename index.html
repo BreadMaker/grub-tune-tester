@@ -1,60 +1,99 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<meta name="description" content="A GRUB_INIT_TUNE online tester. Choose from a selection or create your own!">
-		<meta name="creator" content="BreadMaker aka CTM">
-		<meta name="keywords" content="grub, grub2, tune, GRUB_INIT_TUNE, online, test">
-		<link rel="icon" type="image/png" href="./img/favicon.png">
-		<title>Grub Tune Tester v0.4.0</title>
-		<link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI/2.2.14/dist/semantic.min.css" integrity="sha384-5Eg8kWCPGMl1/3GjE+d9MrU7sOdeJooTJzYKV+mE2erbNc+VVu0wA/TVGNvAc+GL" crossorigin="anonymous">
-		<link rel="stylesheet" href="/css/main.min.css">
-	</head>
-	<body>
-		<div class="ui container">
-			<h1 class="ui center aligned header" style="padding-top:1.5em"><code>GRUB_INIT_TUNE</code> Tester <sup>v0.4.0</sup></h1>
-			<form id="tune-form" class="ui form">
-				<div class="field">
-					<label for="tune">
-						<code>GRUB_INIT_TUNE</code> line:
-					</label>
-					<div class="ui action input">
-						<select id="tune" name="tune" class="ui fluid search dropdown">
-							<option value="1750 523 1 392 1 523 1 659 1 784 1 1047 1 784 1 415 1 523 1 622 1 831 1 622 1 831 1 1046 1 1244 1 1661 1 1244 1 466 1 587 1 698 1 932 1 1175 1 1397 1 1865 1 1397 1">1750 523 1 392 1 523 1 659 1 784 1 1047 1 784 1 415 1 523 1 622 1 831 1 622 1 831 1 1046 1 1244 1 1661 1 1244 1 466 1 587 1 698 1 932 1 1175 1 1397 1 1865 1 1397 1</option>
-							<option value="2000 400 4 0 1 500 4 0 1 600 4 0 1 800 6">2000 400 4 0 1 500 4 0 1 600 4 0 1 800 6</option>
-							<option value="400 900 2 1000 2 800 2 400 2 600 3">400 900 2 1000 2 800 2 400 2 600 3</option>
-							<option value="300 131 1 196 1 196 1 196 1 294 1 196 1 294 1 196 1 131 1">300 131 1 196 1 196 1 196 1 294 1 196 1 294 1 196 1 131 1</option>
-							<option value="480 220 1 277 1 330 1 440 1 185 1 220 1 277 1 370 1 294 1 370 1 440 1 587 1 330 1 415 1 494 1 659 1">480 220 1 277 1 330 1 440 1 185 1 220 1 277 1 370 1 294 1 370 1 440 1 587 1 330 1 415 1 494 1 659 1</option>
-							<option value="480 440 4 440 4 440 4 349 3 523 1 440 4 349 3 523 1 440 8 659 4 659 4 659 4 698 3 523 1 415 4 349 3 523 1 440 8">480 440 4 440 4 440 4 349 3 523 1 440 4 349 3 523 1 440 8 659 4 659 4 659 4 698 3 523 1 415 4 349 3 523 1 440 8</option>
-							<option value="480 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 262 1 315 1 335 3 213 1 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 330 1 315 1 282 3">480 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 262 1 315 1 335 3 213 1 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 330 1 315 1 282 3</option>
-						</select>
-						<button id="copy" class="ui icon secondary button" type="button" data-content="Copy to clipboard" data-position="top right" data-variation="inverted" data-clipboard-target="#tune">
-							<i class="paste icon"></i>
-						</button>
-					</div>
-				</div>
-				<div id="#tune-info" class="ui info message">
-					<ul class="list">
-						<li>Notes: <span id="notes"></span></li>
-						<li>Duration: <span id="duration"></span>ms</li>
-					</ul>
-				</div>
-				<button id="play" class="ui button">Play</button>
-			</form>
-			<h2 class="ui dividing header">FAQ</h2>
-			<h3>How a tune works?</h3>
-			<p><code>GRUB_INIT_TUNE</code> format:</p>
-			<div class="ui grey segment"><code>tempo freq duration [freq duration freq duration...]</code></div>
-			<ul>
-				<li><code>tempo</code> = base for all note durations in beats per minute (60: 1-second base, 120: half-second base, etc.)</li>
-				<li><code>freq</code> = frequency (in Hz) of the sound (0: a rest)</li>
-				<li><code>duration</code> = duration of the sound in a 4/4 bar (1: quarter of a bar, 4: full bar)</li>
-			</ul>
-		</div>
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-		<script src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI/2.2.14/dist/semantic.min.js" integrity="sha384-KfrAxmzWxzKdfquWGNOhm/N9kEjIgoP2yBPMQmAjQ+Is0hp+3BlcWT6PcI7NuKEP" crossorigin="anonymous"></script>
-		<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js" integrity="sha384-5tfO0soa+FisnuBhaHP2VmPXQG/JZ8dLcRL43IkJFzbsXTXT6zIX8q8sIT0VSe2G" crossorigin="anonymous"></script>
-		<script src="./js/main.min.js"></script>
-	</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A GRUB_INIT_TUNE online tester. Choose from a selection or create your own!">
+        <meta name="creator" content="BreadMaker aka CTM, Aaron John Sabu">
+        <meta name="keywords" content="grub, grub2, tune, GRUB_INIT_TUNE, online, test">
+        <link rel="icon" type="image/png" href="./img/favicon.png">
+        <title>Grub Tune Tester v0.4.2</title>
+        <link rel="stylesheet"
+            href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI/2.2.14/dist/semantic.min.css"
+            integrity="sha384-5Eg8kWCPGMl1/3GjE+d9MrU7sOdeJooTJzYKV+mE2erbNc+VVu0wA/TVGNvAc+GL"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/main.min.css">
+    </head>
+    <body>
+		<a href="https://github.com/BreadMaker/grub-tune-tester">
+            <img style="position: absolute; top: 0; right: 0; border: 0;"
+                src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"
+                alt="Fork me on GitHub"
+                data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png">
+        </a>
+        <div class="ui container">
+            <h1 class="ui center aligned header" style="padding-top:1.5em;">
+                <code>GRUB_INIT_TUNE</code> tester <sup>v0.4.2</sup>
+            </h1>
+            <form id="tune-form" class="ui form">
+                <div class="field">
+                    <label for="tune">
+                        <code>GRUB_INIT_TUNE</code> line:
+                    </label>
+                    <div class="ui action input">
+                        <select id="tune" name="tune" class="ui fluid search dropdown">
+                            <option value="1750 523 1 392 1 523 1 659 1 784 1 1047 1 784 1 415 1 523 1 622 1 831 1 622 1 831 1 1046 1 1244 1 1661 1 1244 1 466 1 587 1 698 1 932 1 1175 1 1397 1 1865 1 1397 1">1750 523 1 392 1 523 1 659 1 784 1 1047 1 784 1 415 1 523 1 622 1 831 1 622 1 831 1 1046 1 1244 1 1661 1 1244 1 466 1 587 1 698 1 932 1 1175 1 1397 1 1865 1 1397 1</option>
+                            <option value="2000 400 4 0 1 500 4 0 1 600 4 0 1 800 6">2000 400 4 0 1 500 4 0 1 600 4 0 1 800 6</option>
+                            <option value="400 900 2 1000 2 800 2 400 2 600 3">400 900 2 1000 2 800 2 400 2 600 3</option>
+                            <option value="300 131 1 196 1 196 1 196 1 294 1 196 1 294 1 196 1 131 1">300 131 1 196 1 196 1 196 1 294 1 196 1 294 1 196 1 131 1</option>
+                            <option value="480 220 1 277 1 330 1 440 1 185 1 220 1 277 1 370 1 294 1 370 1 440 1 587 1 330 1 415 1 494 1 659 1">480 220 1 277 1 330 1 440 1 185 1 220 1 277 1 370 1 294 1 370 1 440 1 587 1 330 1 415 1 494 1 659 1</option>
+                            <option value="480 440 4 440 4 440 4 349 3 523 1 440 4 349 3 523 1 440 8 659 4 659 4 659 4 698 3 523 1 415 4 349 3 523 1 440 8">480 440 4 440 4 440 4 349 3 523 1 440 4 349 3 523 1 440 8 659 4 659 4 659 4 698 3 523 1 415 4 349 3 523 1 440 8</option>
+                            <option value="480 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 262 1 315 1 335 3 213 1 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 330 1 315 1 282 3">480 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 262 1 315 1 335 3 213 1 420 1 400 1 420 1 400 1 420 1 315 1 370 1 335 1 282 3 180 1 215 1 282 1 315 3 213 1 330 1 315 1 282 3</option>
+                        </select>
+                        <button id="copy" class="ui icon secondary button"
+                            type="button" data-content="Copy to Clipboard"
+                            data-position="top right" data-variation="inverted"
+                            data-clipboard-target="#tune">
+                            <i class="paste icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="#tune-info" class="ui info message">
+                    <ul class="list">
+                        <li>Notes: <span id="notes"></span></li>
+                        <li>Duration: <span id="duration"></span>ms</li>
+                    </ul>
+                </div>
+                <button id="play" class="ui button">Play</button>
+            </form>
+            <h2 class="ui dividing header">FAQ</h2>
+            <h3>How a tune works?</h3>
+            <div class="ui grey segment"><code>
+                tempo freq duration freq duration freq duration...
+            </code></div>
+            <ul>
+                <li><code>tempo</code> = base for all note durations in
+                    beats per minute (60: 1-second base, 120:
+                    half-second base...)</li>
+                <li><code>freq</code> = frequency (in Hertz) of the sound
+                    (0 for a rest)</li>
+                <li><code>duration</code> = duration of the sound in a 4/4
+                    bar (1: quarter of a bar, 4: a full bar)</li>
+            </ul>
+			<div class="ui divider"></div>
+            <h3>Why is my screen blank when tune is being played (during booting)?</h3>
+            <p>
+                That is how GRUB is designed. Bear in mind that while the tune is
+                playing, booting will be paused. Try not to use long tunes.
+            </p>
+            <div class="ui divider"></div>
+            <h3>Why is the tune very loud during booting?!</h3>
+            <p>
+                Tunes will be played on the PC speaker / the sound card buzzer at full volume. There is no way to control the volume. If the tune is annoyingly loud, a short tune is recommended.
+            </p>
+        </div>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI/2.2.14/dist/semantic.min.js"
+            integrity="sha384-KfrAxmzWxzKdfquWGNOhm/N9kEjIgoP2yBPMQmAjQ+Is0hp+3BlcWT6PcI7NuKEP"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"
+            integrity="sha384-5tfO0soa+FisnuBhaHP2VmPXQG/JZ8dLcRL43IkJFzbsXTXT6zIX8q8sIT0VSe2G"
+            crossorigin="anonymous"></script>
+        <script src="./js/main.min.js"></script>
+    </body>
 </html>
