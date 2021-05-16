@@ -1,9 +1,21 @@
-.ui.action.input .ui.dropdown:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+.grow-wrap {
+  display: grid;
 }
 
-.ui.action.input .ui.dropdown:last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+.grow-wrap::after {
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+  visibility: hidden;
+}
+
+.grow-wrap > textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+.grow-wrap > textarea, .grow-wrap::after {
+  border: 1px solid #ced4da;
+  padding: .375rem .75rem;
+  font: inherit;
+  grid-area: 1 / 1 / 2 / 2;
 }
