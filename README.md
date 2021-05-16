@@ -1,6 +1,6 @@
 # Grub Tune Tester
 
-**GTT** is an online tool to test your `GRUB_INIT_TUNE` beforehand.
+[**GTT**](https://breadmaker.github.io/grub-tune-tester/) is an online tool to test your `GRUB_INIT_TUNE` beforehand.
 
 ## How to use
 
@@ -8,13 +8,13 @@ Just enter a `GRUB_INIT_TUNE` using the following format:
 
 `tempo freq duration [freq duration freq duration...]`
 
-Where `tempo` is the base for all note durations in beats per minute (60 gives
-a 1-second base, 120 gives a half-second base, etc.), `freq` is the frequency
-(in hertz) of the sound (set 0 to produce a rest), and `duration` is the
-duration of the sound in a 4/4 bar (meaning 1 is a quarter of a bar and 4 a full
-bar).
+Where:
+
+ - `tempo` is the base time for all note durations, as beats per minute. 60 means 1 second notes. 120 means 0.5s notes, etc.
+ - `freq` is the first part of a note. Indicates its frequency in hertz. 262 is a Middle C. 0 means silence.
+ - `duration` is the second part of a note. Indicates its duration measured in bars. With a tempo of 60, 1 means a one second note, 2 means a two seconds note.
 
 ## How to help
 
-This project is in a very early stage, so there's a lot of room for improvements.
-[Let me know how GTT can be better](https://github.com/BreadMaker/grub-tune-tester/issues/new).
+You can help by reporting bugs, suggesting functionalities or contributing with
+new tunes [over here](https://github.com/BreadMaker/grub-tune-tester/issues/new).
