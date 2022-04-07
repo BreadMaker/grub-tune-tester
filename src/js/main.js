@@ -1,5 +1,7 @@
+/*global bootstrap, ClipboardJS*/
+
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-var requestId, bootstrap, ClipboardJS;
+var requestId;
 
 function ready(fn) {
   if (document.readyState != "loading") {
@@ -93,6 +95,9 @@ function loadSelect() {
     }, {
       title: "Wolfestein 3D Music Intro",
       tune: "300 131 1 196 1 196 1 196 1 294 1 196 1 294 1 196 1 131 2"
+    }, {
+      title: "Joe Hisaishi's „One Summer Day“ OP chord",
+      tune: "1536 349 3 698 1 523 2 784 1 1319 6"
     }],
     tuneSelect = document.getElementById("tune");
   tuneSelect.remove(0);
@@ -202,6 +207,7 @@ ready(function() {
   loadSelect();
   addFormEvents();
   calculateDuration(createTuneObj(document.getElementById("tune").value));
+  new bootstrap.Popover("#trivia");
   new ClipboardJS("#copy", {
     text: function() {
       return document.getElementById("tune-input").value;

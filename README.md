@@ -14,6 +14,10 @@ Where:
  - `freq` is the first part of a note. Indicates its frequency in hertz. 262 is a Middle C. 0 means silence.
  - `duration` is the second part of a note. Indicates its duration measured in bars. With a tempo of 60, 1 means a one second note, 2 means a two seconds note.
 
+## In need of ideas?
+
+Check [this gist](https://gist.github.com/ArtBIT/cfb030c0791b42330381acce33f82ca0) for ideas & cool tunes. Thanks to [@jtagcat](https://gist.github.com/jtagcat) for [the suggestion](https://github.com/BreadMaker/grub-tune-tester/issues/8).
+
 ## How to help
 
 You can help by reporting bugs, suggesting functionalities or contributing with

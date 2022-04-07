@@ -19,3 +19,7 @@
   font: inherit;
   grid-area: 1 / 1 / 2 / 2;
 }
+
+#trivia {
+  cursor: pointer;
+}
