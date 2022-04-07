@@ -16,7 +16,7 @@ Where:
 
 ## In need of ideas?
 
-Check [this gist](https://gist.github.com/ArtBIT/cfb030c0791b42330381acce33f82ca0) for ideas & cool tunes. Thanks to [@jtagcat](https://gist.github.com/jtagcat) for [the suggestion](https://github.com/BreadMaker/grub-tune-tester/issues/8).
+Check [this gist](https://gist.github.com/ArtBIT/cfb030c0791b42330381acce33f82ca0) for ideas & cool tunes. Thanks to [@jtagcat](https://github.com/jtagcat) for [the suggestion](https://github.com/BreadMaker/grub-tune-tester/issues/8).
 
 ## How to help
 
