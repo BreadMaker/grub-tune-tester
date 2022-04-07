@@ -1,6 +1,6 @@
 {
   "name": "grub-tune-tester",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A GRUB_INIT_TUNE online tester.",
   "main": "index.html",
   "repository": {
@@ -22,11 +22,11 @@
   "author": "BreadMaker",
   "license": "GPL-3.0",
   "devDependencies": {
-    "clean-css-cli": "^5.3.0",
-    "eslint": "^7.26.0",
+    "clean-css-cli": "^5.6.0",
+    "eslint": "^7.32.0",
     "html-minifier": "^4.0.0",
     "npm-run-all": "^4.1.5",
-    "terser": "^5.7.0",
+    "terser": "^5.12.1",
     "watch": "^0.13.0"
   }
 }
