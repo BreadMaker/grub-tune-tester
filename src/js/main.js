@@ -1,6 +1,5 @@
 /*global bootstrap, ClipboardJS*/
 
-var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 var requestId;
 
 function ready(fn) {
@@ -38,7 +37,8 @@ function calculateDuration(tuneObj) {
 }
 
 function play(tuneObj) {
-  let baseTime = audioCtx.currentTime,
+  let audioCtx = new (window.AudioContext || window.webkitAudioContext)(),
+    baseTime = audioCtx.currentTime,
     arrayLength = tuneObj.tune.length,
     playlength = 0,
     gainNode = audioCtx.createGain();
@@ -51,7 +51,7 @@ function play(tuneObj) {
     oscillator.type = "square";
     oscillator.frequency.value = tuneObj.tune[i].frequency;
     if (i == arrayLength - 1) {
-      oscillator.onended = function() {
+      oscillator.onended = () => {
         document.getElementById("tune").classList.remove("disabled");
         document.getElementById("tune").removeAttribute("disabled");
         document.getElementById("play").classList.remove("d-none");
@@ -74,6 +74,9 @@ function play(tuneObj) {
 }
 
 function loadSelect() {
+  const urlSearchParams = new URLSearchParams(window.location.search),
+    params = Object.fromEntries(urlSearchParams.entries()),
+    tuneParam = params["tune"];
   let data = [{
       title: "Default tune",
       tune: "480 440 1"
@@ -99,6 +102,7 @@ function loadSelect() {
       title: "Joe Hisaishi's „One Summer Day“ OP chord",
       tune: "1536 349 3 698 1 523 2 784 1 1319 6"
     }],
+    tuneInput = document.getElementById("tune-input"),
     tuneSelect = document.getElementById("tune");
   tuneSelect.remove(0);
   for (let item of data) {
@@ -108,11 +112,26 @@ function loadSelect() {
     tuneSelect.appendChild(option);
   }
   let option = document.createElement("option");
+  option.textContent = "URL custom input";
+  option.id = "url-option";
+  option.value = "";
+  option.hidden = true;
+  tuneSelect.appendChild(option);
+  option = document.createElement("option");
   option.textContent = "Custom input";
+  option.id = "custom-option";
   option.value = "";
   tuneSelect.appendChild(option);
   tuneSelect.removeAttribute("disabled");
   document.getElementById("tune-input").value = tuneSelect.value;
+  if (tuneParam != undefined) {
+    let urlCustomOption = document.getElementById("url-option");
+    urlCustomOption.value = tuneParam;
+    urlCustomOption.hidden = false;
+    urlCustomOption.selected = true;
+    tuneInput.readonly = false;
+    tuneInput.value = tuneParam;
+  }
 }
 
 function showWarningMessage(message) {
@@ -172,14 +191,14 @@ function addFormEvents() {
       document.getElementById("play").setAttribute("disabled", "disabled");
       warningAlertContainer.classList.remove("d-none");
       tuneInfoContainer.classList.add("d-none");
-      tuneInput.removeAttribute("readonly");
+      tuneInput.readonly = false;
     } else {
       document.getElementById("play").classList.remove("disabled");
       document.getElementById("play").removeAttribute("disabled");
       warningAlertContainer.classList.add("d-none");
       tuneInfoContainer.classList.remove("d-none");
       calculateDuration(createTuneObj(tuneSelect.value));
-      tuneInput.setAttribute("readonly", "readonly");
+      tuneInput.readonly = true;
     }
   });
   tuneInput.addEventListener("input", () => {
@@ -202,18 +221,18 @@ function addFormEvents() {
   });
 }
 
-ready(function() {
-  let tuneInput = document.getElementByid("tune-input");
+ready(() => {
+  let tuneInput = document.getElementById("tune-input");
   tuneInput.value = "Loading...";
   loadSelect();
   addFormEvents();
   calculateDuration(createTuneObj(tuneInput.value));
   new bootstrap.Popover("#trivia");
   new ClipboardJS("#copy", {
-    text: function() {
+    text: () => {
       return tuneInput.value;
     }
-  }).on("success", function() {
+  }).on("success", () => {
     var tooltip = new bootstrap.Tooltip(document.getElementById("copy"), {
       title: "Copied!",
       trigger: "hover"
@@ -225,11 +244,4 @@ ready(function() {
       once: true
     });
   });
-  
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
-  const tuneParam = params["tune"];
-  if (tuneParam != undefined) {
-    tuneInput.value = tuneParam;
-  }
 });
