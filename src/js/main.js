@@ -191,7 +191,7 @@ function addFormEvents() {
       document.getElementById("play").setAttribute("disabled", "disabled");
       warningAlertContainer.classList.remove("d-none");
       tuneInfoContainer.classList.add("d-none");
-      tuneInput.readonly = false;
+      tuneInput.removeAttribute("readonly");
     } else {
       document.getElementById("play").classList.remove("disabled");
       document.getElementById("play").removeAttribute("disabled");
@@ -200,6 +200,7 @@ function addFormEvents() {
       calculateDuration(createTuneObj(tuneSelect.value));
       tuneInput.readonly = true;
     }
+    validateTuneInput(tuneInput.value);
   });
   tuneInput.addEventListener("input", () => {
     tuneInput.parentNode.dataset.replicatedValue = tuneInput.value;
@@ -226,6 +227,7 @@ ready(() => {
   tuneInput.value = "Loading...";
   loadSelect();
   addFormEvents();
+  validateTuneInput(tuneInput.value);
   calculateDuration(createTuneObj(tuneInput.value));
   new bootstrap.Popover("#trivia");
   new ClipboardJS("#copy", {
