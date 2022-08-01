@@ -203,14 +203,15 @@ function addFormEvents() {
 }
 
 ready(function() {
-  document.getElementById("tune-input").value = "Loading...";
+  let tuneInput = document.getElementByid("tune-input");
+  tuneInput.value = "Loading...";
   loadSelect();
   addFormEvents();
-  calculateDuration(createTuneObj(document.getElementById("tune").value));
+  calculateDuration(createTuneObj(tuneInput.value));
   new bootstrap.Popover("#trivia");
   new ClipboardJS("#copy", {
     text: function() {
-      return document.getElementById("tune-input").value;
+      return tuneInput.value;
     }
   }).on("success", function() {
     var tooltip = new bootstrap.Tooltip(document.getElementById("copy"), {
@@ -224,4 +225,11 @@ ready(function() {
       once: true
     });
   });
+  
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const params = Object.fromEntries(urlSearchParams.entries());
+  const tuneParam = params["tune"];
+  if (tuneParam != undefined) {
+    tuneInput.value = tuneParam;
+  }
 });
