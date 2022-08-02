@@ -52,8 +52,8 @@ function play(tuneObj) {
     oscillator.frequency.value = tuneObj.tune[i].frequency;
     if (i == arrayLength - 1) {
       oscillator.onended = () => {
-        document.getElementById("tune").classList.remove("disabled");
-        document.getElementById("tune").removeAttribute("disabled");
+        document.getElementById("tune-select").classList.remove("disabled");
+        document.getElementById("tune-select").removeAttribute("disabled");
         document.getElementById("play").classList.remove("d-none");
         document.getElementById("stop").classList.add("d-none");
         cancelAnimationFrame(requestId);
@@ -103,7 +103,7 @@ function loadSelect() {
       tune: "1536 349 3 698 1 523 2 784 1 1319 6"
     }],
     tuneInput = document.getElementById("tune-input"),
-    tuneSelect = document.getElementById("tune");
+    tuneSelect = document.getElementById("tune-select");
   tuneSelect.remove(0);
   for (let item of data) {
     let option = document.createElement("option");
@@ -179,7 +179,7 @@ function validateTuneInput(input) {
 }
 
 function addFormEvents() {
-  let tuneSelect = document.getElementById("tune"),
+  let tuneSelect = document.getElementById("tune-select"),
     tuneInput = document.getElementById("tune-input"),
     warningAlertContainer = document.getElementById("warning-alert"),
     tuneInfoContainer = document.getElementById("tune-info");
@@ -191,7 +191,7 @@ function addFormEvents() {
       document.getElementById("play").setAttribute("disabled", "disabled");
       warningAlertContainer.classList.remove("d-none");
       tuneInfoContainer.classList.add("d-none");
-      tuneInput.readonly = false;
+      tuneInput.removeAttribute("readonly");
     } else {
       document.getElementById("play").classList.remove("disabled");
       document.getElementById("play").removeAttribute("disabled");
@@ -200,19 +200,22 @@ function addFormEvents() {
       calculateDuration(createTuneObj(tuneSelect.value));
       tuneInput.readonly = true;
     }
+    validateTuneInput(tuneInput.value);
   });
   tuneInput.addEventListener("input", () => {
     tuneInput.parentNode.dataset.replicatedValue = tuneInput.value;
+    document.getElementById("custom-option").selected = true;
     validateTuneInput(tuneInput.value);
   });
   tuneInput.addEventListener("paste", () => {
     tuneInput.parentNode.dataset.replicatedValue = tuneInput.value;
+    document.getElementById("custom-option").selected = true;
     validateTuneInput(tuneInput.value);
   });
   document.getElementById("tune-form").addEventListener("submit", event => {
     event.preventDefault();
-    document.getElementById("tune").classList.add("disabled");
-    document.getElementById("tune").setAttribute("disabled", "disabled");
+    document.getElementById("tune-select").classList.add("disabled");
+    document.getElementById("tune-select").setAttribute("disabled", "disabled");
     document.getElementById("play").classList.add("d-none");
     document.getElementById("stop").classList.remove("d-none");
     requestId = requestAnimationFrame(() => {
@@ -226,6 +229,7 @@ ready(() => {
   tuneInput.value = "Loading...";
   loadSelect();
   addFormEvents();
+  validateTuneInput(tuneInput.value);
   calculateDuration(createTuneObj(tuneInput.value));
   new bootstrap.Popover("#trivia");
   new ClipboardJS("#copy", {
