@@ -20,7 +20,7 @@ Check [this gist](https://gist.github.com/ArtBIT/cfb030c0791b42330381acce33f82ca
 
 ## How to contribute
 
-You can contribute using the guidelines described [here](https://github.com/BreadMaker/grub-tune-tester/CONTRIBUTING.md). Thank you in advance for your contributions.
+You can contribute using the guidelines described [here](https://github.com/BreadMaker/grub-tune-tester/blob/master/CONTRIBUTING.md). Thank you in advance for your contributions.
 
 ## How to help
 
