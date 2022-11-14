@@ -18,6 +18,10 @@ Where:
 
 Check [this gist](https://gist.github.com/ArtBIT/cfb030c0791b42330381acce33f82ca0) for ideas & cool tunes. Thanks to [@jtagcat](https://github.com/jtagcat) for [the suggestion](https://github.com/BreadMaker/grub-tune-tester/issues/8).
 
+## How to contribute
+
+You can contribute using the guidelines described [here](https://github.com/BreadMaker/grub-tune-tester/CONTRIBUTING.md). Thank you in advance for your contributions.
+
 ## How to help
 
 You can help by reporting bugs, suggesting functionalities or contributing with
