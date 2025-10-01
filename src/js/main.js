@@ -11,7 +11,7 @@ function ready(fn) {
 }
 
 function createTuneObj(tuneStr) {
-  var tuneArr = tuneStr.split(" ");
+  var tuneArr = tuneStr.trim().split(/\s+/);
   var tuneObj = Object();
   tuneObj.tempo = parseInt(tuneArr[0]);
   tuneObj.tune = [];
@@ -143,17 +143,13 @@ function showWarningMessage(message) {
 }
 
 function validateTuneInput(input) {
-  let inputArray = input.split(" "),
+  let inputArray = input.trim().split(/\s+/),
     isAllNumbers = true,
-    containsBlanks = false,
     warningAlertContainer = document.getElementById("warning-alert"),
     tuneInfoContainer = document.getElementById("tune-info");
   for (let item of inputArray) {
     if (isNaN(item)) {
       isAllNumbers = false;
-      break;
-    } else if (item === "") {
-      containsBlanks = true;
       break;
     }
   }
@@ -161,8 +157,6 @@ function validateTuneInput(input) {
     showWarningMessage("Input at least one note.");
   } else if (!isAllNumbers) {
     showWarningMessage("Please enter only numbers.");
-  } else if (containsBlanks) {
-    showWarningMessage("Only one space between numbers.");
   } else {
     if (inputArray.length < 3) {
       showWarningMessage("Input at least one note.");
@@ -234,7 +228,7 @@ ready(() => {
   new bootstrap.Popover("#trivia");
   new ClipboardJS("#copy", {
     text: () => {
-      return tuneInput.value;
+      return tuneInput.value.trim().replace(/\s+/g, " ");
     }
   }).on("success", () => {
     var tooltip = new bootstrap.Tooltip(document.getElementById("copy"), {
