@@ -218,6 +218,21 @@ function addFormEvents() {
   });
 }
 
+function showTooltipOnce(element, text) {
+  return function() {
+    var tooltip = new bootstrap.Tooltip(element, {
+      title: text,
+      trigger: "hover"
+    });
+    tooltip.show();
+    element.addEventListener("hidden.bs.tooltip", () => {
+      tooltip.dispose();
+    }, {
+      once: true
+    });
+  };
+}
+
 ready(() => {
   let tuneInput = document.getElementById("tune-input");
   tuneInput.value = "Loading...";
@@ -225,21 +240,19 @@ ready(() => {
   addFormEvents();
   validateTuneInput(tuneInput.value);
   calculateDuration(createTuneObj(tuneInput.value));
+  let copyButton = document.getElementById("copy");
+  let permalinkButton = document.getElementById("permalink");
   new bootstrap.Popover("#trivia");
-  new ClipboardJS("#copy", {
+  new ClipboardJS(copyButton, {
     text: () => {
       return tuneInput.value.trim().replace(/\s+/g, " ");
     }
-  }).on("success", () => {
-    var tooltip = new bootstrap.Tooltip(document.getElementById("copy"), {
-      title: "Copied!",
-      trigger: "hover"
-    });
-    tooltip.show();
-    document.getElementById("copy").addEventListener("hidden.bs.tooltip", () => {
-      tooltip.dispose();
-    }, {
-      once: true
-    });
-  });
+  }).on("success", showTooltipOnce(copyButton, "Copied!"));
+  new ClipboardJS(permalinkButton, {
+    text: () => {
+      let url = new URL(window.location.href);
+      url.search = "?tune=" + tuneInput.value.trim().replace(/\s+/g, "+");
+      return url.href;
+    }
+  }).on("success", showTooltipOnce(permalinkButton, "Copied!"));
 });
