@@ -247,12 +247,12 @@ ready(() => {
     text: () => {
       return tuneInput.value.trim().replace(/\s+/g, " ");
     }
-  }).on("success", showTooltipOnce(copyButton, "Copied!"));
+  }).on("success", showTooltipOnce(copyButton, "Tune copied!"));
   new ClipboardJS(permalinkButton, {
     text: () => {
       let url = new URL(window.location.href);
       url.search = "?tune=" + tuneInput.value.trim().replace(/\s+/g, "+");
       return url.href;
     }
-  }).on("success", showTooltipOnce(permalinkButton, "Copied!"));
+  }).on("success", showTooltipOnce(permalinkButton, "URL copied!"));
 });
