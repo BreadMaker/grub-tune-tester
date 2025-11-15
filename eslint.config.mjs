@@ -29,7 +29,10 @@ export default defineConfig([{
     rules: {
         indent: ["error", 2],
         "linebreak-style": ["error", "unix"],
-        quotes: ["error", "double"],
+        quotes: ["error", "single", {
+            avoidEscape: true,
+            allowTemplateLiterals: true
+        }],
         semi: ["error", "always"],
     },
 }]);
