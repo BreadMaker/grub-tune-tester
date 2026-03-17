@@ -99,7 +99,7 @@ function loadSelect() {
       title: 'Wolfestein 3D Music Intro',
       tune: '300 131 1 196 1 196 1 196 1 294 1 196 1 294 1 196 1 131 2'
     }, {
-      title: "Joe Hisaishi's „One Summer Day“ OP chord",
+      title: 'Joe Hisaishi\'s „One Summer Day“ OP chord',
       tune: '1536 349 3 698 1 523 2 784 1 1319 6'
     }],
     tuneInput = document.getElementById('tune-input'),
