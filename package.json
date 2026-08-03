@@ -29,7 +29,7 @@
     "html-minifier-next": "^5.2.1",
     "http-server": "^14.1.1",
     "npm-run-all2": "^8.0.4",
-    "postcss": "^8.5.8",
+    "postcss": "^8.5.25",
     "postcss-cli": "^11.0.1",
     "watch": "^0.13.0"
   }
