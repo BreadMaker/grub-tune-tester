@@ -1,6 +1,6 @@
 {
   "name": "grub-tune-tester",
-  "version": "0.9.5",
+  "version": "0.10.0",
   "description": "A GRUB_INIT_TUNE online tester.",
   "main": "index.html",
   "repository": {
@@ -24,19 +24,19 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "cssnano": "^7.1.9",
-    "esbuild": "^0.28.1",
-    "eslint": "^10.8.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.12.0",
     "html-minifier-next": "^5.2.2",
     "http-server": "^14.1.1",
     "npm-run-all2": "^8.0.4",
-    "postcss": "^8.5.25",
-    "postcss-cli": "^11.0.1",
+    "postcss": "^8.5.30",
+    "postcss-cli": "^12.0.0",
     "watch": "^0.13.0"
   },
   "overrides": {
     "picomatch": "^4.0.4"
   },
   "allowScripts": {
-    "esbuild@0.28.1": true
+    "esbuild@0.28.2": true
   }
 }
